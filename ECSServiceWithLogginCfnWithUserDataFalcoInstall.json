@@ -1,0 +1,1450 @@
+{
+    "Resources": {
+        "rajasrsolarcvpc59027D7E": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "10.101.0.0/16",
+                "EnableDnsHostnames": true,
+                "EnableDnsSupport": true,
+                "InstanceTenancy": "default",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/Resource"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet1Subnet3D931F91": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.101.0.0/19",
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "AvailabilityZone": "us-east-1a",
+                "MapPublicIpOnLaunch": true,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1/Subnet"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet1RouteTable35CF6DD1": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1/RouteTable"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet1RouteTableAssociation70B717BF": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet1RouteTable35CF6DD1"
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet1Subnet3D931F91"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1/RouteTableAssociation"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet1DefaultRoute7B51A49B": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet1RouteTable35CF6DD1"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "rajasrsolarcvpcIGW0279502A"
+                }
+            },
+            "DependsOn": [
+                "rajasrsolarcvpcVPCGW18E200A4"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1/DefaultRoute"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet1EIPA90A8131": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+                "Domain": "vpc",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1/EIP"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet1NATGateway92BC90DF": {
+            "Type": "AWS::EC2::NatGateway",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "rajasrsolarcvpcPublicSubnet1EIPA90A8131",
+                        "AllocationId"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet1Subnet3D931F91"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet1/NATGateway"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet2Subnet5B7C5B2C": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.101.32.0/19",
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "AvailabilityZone": "us-east-1b",
+                "MapPublicIpOnLaunch": true,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2/Subnet"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet2RouteTableEF0D9415": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2/RouteTable"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet2RouteTableAssociation676D007B": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet2RouteTableEF0D9415"
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet2Subnet5B7C5B2C"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2/RouteTableAssociation"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet2DefaultRouteAED9D2AA": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet2RouteTableEF0D9415"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "rajasrsolarcvpcIGW0279502A"
+                }
+            },
+            "DependsOn": [
+                "rajasrsolarcvpcVPCGW18E200A4"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2/DefaultRoute"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet2EIPA00A6665": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+                "Domain": "vpc",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2/EIP"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet2NATGateway66B1B1DE": {
+            "Type": "AWS::EC2::NatGateway",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "rajasrsolarcvpcPublicSubnet2EIPA00A6665",
+                        "AllocationId"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet2Subnet5B7C5B2C"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet2/NATGateway"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet3Subnet9D3B6DE0": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.101.64.0/19",
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "AvailabilityZone": "us-east-1c",
+                "MapPublicIpOnLaunch": true,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3/Subnet"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet3RouteTableAC741529": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3/RouteTable"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet3RouteTableAssociation363F9E72": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet3RouteTableAC741529"
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet3Subnet9D3B6DE0"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3/RouteTableAssociation"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet3DefaultRoute066C5B2F": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet3RouteTableAC741529"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "rajasrsolarcvpcIGW0279502A"
+                }
+            },
+            "DependsOn": [
+                "rajasrsolarcvpcVPCGW18E200A4"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3/DefaultRoute"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet3EIPA1B27B28": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+                "Domain": "vpc",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3/EIP"
+            }
+        },
+        "rajasrsolarcvpcPublicSubnet3NATGateway42326617": {
+            "Type": "AWS::EC2::NatGateway",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "rajasrsolarcvpcPublicSubnet3EIPA1B27B28",
+                        "AllocationId"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet3Subnet9D3B6DE0"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PublicSubnet3/NATGateway"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet1Subnet09B0031F": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.101.96.0/19",
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "AvailabilityZone": "us-east-1a",
+                "MapPublicIpOnLaunch": false,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "Private"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Private"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet1"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet1/Subnet"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet1RouteTable862005E5": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet1"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet1/RouteTable"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet1RouteTableAssociationFBB7F2E1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet1RouteTable862005E5"
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet1Subnet09B0031F"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet1/RouteTableAssociation"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet1DefaultRoute8C4A244F": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet1RouteTable862005E5"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NatGatewayId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet1NATGateway92BC90DF"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet1/DefaultRoute"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet2Subnet3B6FF87A": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.101.128.0/19",
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "AvailabilityZone": "us-east-1b",
+                "MapPublicIpOnLaunch": false,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "Private"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Private"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet2"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet2/Subnet"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet2RouteTable9B0D89AC": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet2"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet2/RouteTable"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet2RouteTableAssociationD246C465": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet2RouteTable9B0D89AC"
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet2Subnet3B6FF87A"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet2/RouteTableAssociation"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet2DefaultRoute06AB8A53": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet2RouteTable9B0D89AC"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NatGatewayId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet2NATGateway66B1B1DE"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet2/DefaultRoute"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet3SubnetFB387356": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.101.160.0/19",
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "AvailabilityZone": "us-east-1c",
+                "MapPublicIpOnLaunch": false,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "Private"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Private"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet3/Subnet"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet3RouteTable4D37AF78": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet3/RouteTable"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet3RouteTableAssociation595BA7F7": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet3RouteTable4D37AF78"
+                },
+                "SubnetId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet3SubnetFB387356"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet3/RouteTableAssociation"
+            }
+        },
+        "rajasrsolarcvpcPrivateSubnet3DefaultRouteA2A981E9": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rajasrsolarcvpcPrivateSubnet3RouteTable4D37AF78"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NatGatewayId": {
+                    "Ref": "rajasrsolarcvpcPublicSubnet3NATGateway42326617"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/PrivateSubnet3/DefaultRoute"
+            }
+        },
+        "rajasrsolarcvpcIGW0279502A": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/rajasr-solarc-vpc"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/IGW"
+            }
+        },
+        "rajasrsolarcvpcVPCGW18E200A4": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                },
+                "InternetGatewayId": {
+                    "Ref": "rajasrsolarcvpcIGW0279502A"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/rajasr-solarc-vpc/VPCGW"
+            }
+        },
+        "Ec2ClusterEE43E89D": {
+            "Type": "AWS::ECS::Cluster",
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupInstanceSecurityGroup149B0A9E": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/InstanceSecurityGroup",
+                "SecurityGroupEgress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "Description": "Allow all outbound traffic by default",
+                        "IpProtocol": "-1"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "rajasrsolarcvpc59027D7E"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/InstanceSecurityGroup/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupInstanceRole73D80898": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/InstanceRole/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupInstanceRoleDefaultPolicy6D2DC2FD": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "ecs:DeregisterContainerInstance",
+                                "ecs:RegisterContainerInstance",
+                                "ecs:Submit*"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "Ec2ClusterEE43E89D",
+                                    "Arn"
+                                ]
+                            }
+                        },
+                        {
+                            "Action": [
+                                "ecs:Poll",
+                                "ecs:StartTelemetrySession"
+                            ],
+                            "Condition": {
+                                "ArnEquals": {
+                                    "ecs:cluster": {
+                                        "Fn::GetAtt": [
+                                            "Ec2ClusterEE43E89D",
+                                            "Arn"
+                                        ]
+                                    }
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "ecs:DiscoverPollEndpoint",
+                                "ecr:GetAuthorizationToken",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "Ec2ClusterDefaultAutoScalingGroupInstanceRoleDefaultPolicy6D2DC2FD",
+                "Roles": [
+                    {
+                        "Ref": "Ec2ClusterDefaultAutoScalingGroupInstanceRole73D80898"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/InstanceRole/DefaultPolicy/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupInstanceProfileDB232471": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "Roles": [
+                    {
+                        "Ref": "Ec2ClusterDefaultAutoScalingGroupInstanceRole73D80898"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/InstanceProfile"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupLaunchConfig7B2FED3A": {
+            "Type": "AWS::AutoScaling::LaunchConfiguration",
+            "Properties": {
+                "ImageId": {
+                    "Ref": "SsmParameterValueawsserviceecsoptimizedamiamazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter"
+                },
+                "InstanceType": "t3.medium",
+                "IamInstanceProfile": {
+                    "Ref": "Ec2ClusterDefaultAutoScalingGroupInstanceProfileDB232471"
+                },
+                "SecurityGroups": [
+                    {
+                        "Fn::GetAtt": [
+                            "Ec2ClusterDefaultAutoScalingGroupInstanceSecurityGroup149B0A9E",
+                            "GroupId"
+                        ]
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "#!/bin/bash\necho ECS_CLUSTER=",
+                                {
+                                    "Ref": "Ec2ClusterEE43E89D"
+                                },
+                                " >> /etc/ecs/ecs.config\nsudo iptables --insert FORWARD 1 --in-interface docker+ --destination 169.254.169.254/32 --jump DROP\nsudo service iptables save\nrpm --import https://falco.org/repo/falcosecurity-3672BA8F.asc\ncurl -s -o /etc/yum.repos.d/falcosecurity.repo https://falco.org/repo/falcosecurity-rpm.repo\nyum -y install kernel-devel-$(uname -r)\nyum -y install falco\necho ECS_AWSVPC_BLOCK_IMDS=true >> /etc/ecs/ecs.config"
+                            ]
+                        ]
+                    }
+                }
+            },
+            "DependsOn": [
+                "Ec2ClusterDefaultAutoScalingGroupInstanceRoleDefaultPolicy6D2DC2FD",
+                "Ec2ClusterDefaultAutoScalingGroupInstanceRole73D80898"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/LaunchConfig"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupASGC5A6D4C0": {
+            "Type": "AWS::AutoScaling::AutoScalingGroup",
+            "Properties": {
+                "MaxSize": "1",
+                "MinSize": "1",
+                "LaunchConfigurationName": {
+                    "Ref": "Ec2ClusterDefaultAutoScalingGroupLaunchConfig7B2FED3A"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "PropagateAtLaunch": true,
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ],
+                "VPCZoneIdentifier": [
+                    {
+                        "Ref": "rajasrsolarcvpcPrivateSubnet1Subnet09B0031F"
+                    },
+                    {
+                        "Ref": "rajasrsolarcvpcPrivateSubnet2Subnet3B6FF87A"
+                    },
+                    {
+                        "Ref": "rajasrsolarcvpcPrivateSubnet3SubnetFB387356"
+                    }
+                ]
+            },
+            "UpdatePolicy": {
+                "AutoScalingReplacingUpdate": {
+                    "WillReplace": true
+                },
+                "AutoScalingScheduledAction": {
+                    "IgnoreUnmodifiedGroupSizeProperties": true
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/ASG"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRole23116FA3": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/DrainECSHook/Function/ServiceRole/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicy638C9E33": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "ec2:DescribeInstances",
+                                "ec2:DescribeInstanceAttribute",
+                                "ec2:DescribeInstanceStatus",
+                                "ec2:DescribeHosts"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": "autoscaling:CompleteLifecycleAction",
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::Join": [
+                                    "",
+                                    [
+                                        "arn:",
+                                        {
+                                            "Ref": "AWS::Partition"
+                                        },
+                                        ":autoscaling:us-east-1:126156715271:autoScalingGroup:*:autoScalingGroupName/",
+                                        {
+                                            "Ref": "Ec2ClusterDefaultAutoScalingGroupASGC5A6D4C0"
+                                        }
+                                    ]
+                                ]
+                            }
+                        },
+                        {
+                            "Action": [
+                                "ecs:DescribeContainerInstances",
+                                "ecs:DescribeTasks"
+                            ],
+                            "Condition": {
+                                "ArnEquals": {
+                                    "ecs:cluster": {
+                                        "Fn::GetAtt": [
+                                            "Ec2ClusterEE43E89D",
+                                            "Arn"
+                                        ]
+                                    }
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "ecs:ListContainerInstances",
+                                "ecs:SubmitContainerStateChange",
+                                "ecs:SubmitTaskStateChange"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "Ec2ClusterEE43E89D",
+                                    "Arn"
+                                ]
+                            }
+                        },
+                        {
+                            "Action": [
+                                "ecs:UpdateContainerInstancesState",
+                                "ecs:ListTasks"
+                            ],
+                            "Condition": {
+                                "ArnEquals": {
+                                    "ecs:cluster": {
+                                        "Fn::GetAtt": [
+                                            "Ec2ClusterEE43E89D",
+                                            "Arn"
+                                        ]
+                                    }
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicy638C9E33",
+                "Roles": [
+                    {
+                        "Ref": "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRole23116FA3"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/DrainECSHook/Function/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionE0DEFB31": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "ZipFile": "import boto3, json, os, time\n\necs = boto3.client('ecs')\nautoscaling = boto3.client('autoscaling')\n\n\ndef lambda_handler(event, context):\n  print(json.dumps(event))\n  cluster = os.environ['CLUSTER']\n  snsTopicArn = event['Records'][0]['Sns']['TopicArn']\n  lifecycle_event = json.loads(event['Records'][0]['Sns']['Message'])\n  instance_id = lifecycle_event.get('EC2InstanceId')\n  if not instance_id:\n    print('Got event without EC2InstanceId: %s', json.dumps(event))\n    return\n\n  instance_arn = container_instance_arn(cluster, instance_id)\n  print('Instance %s has container instance ARN %s' % (lifecycle_event['EC2InstanceId'], instance_arn))\n\n  if not instance_arn:\n    return\n\n  while has_tasks(cluster, instance_arn):\n    time.sleep(10)\n\n  try:\n    print('Terminating instance %s' % instance_id)\n    autoscaling.complete_lifecycle_action(\n        LifecycleActionResult='CONTINUE',\n        **pick(lifecycle_event, 'LifecycleHookName', 'LifecycleActionToken', 'AutoScalingGroupName'))\n  except Exception as e:\n    # Lifecycle action may have already completed.\n    print(str(e))\n\n\ndef container_instance_arn(cluster, instance_id):\n  \"\"\"Turn an instance ID into a container instance ARN.\"\"\"\n  arns = ecs.list_container_instances(cluster=cluster, filter='ec2InstanceId==' + instance_id)['containerInstanceArns']\n  if not arns:\n    return None\n  return arns[0]\n\n\ndef has_tasks(cluster, instance_arn):\n  \"\"\"Return True if the instance is running tasks for the given cluster.\"\"\"\n  instances = ecs.describe_container_instances(cluster=cluster, containerInstances=[instance_arn])['containerInstances']\n  if not instances:\n    return False\n  instance = instances[0]\n\n  if instance['status'] == 'ACTIVE':\n    # Start draining, then try again later\n    set_container_instance_to_draining(cluster, instance_arn)\n    return True\n\n  tasks = instance['runningTasksCount'] + instance['pendingTasksCount']\n  print('Instance %s has %s tasks' % (instance_arn, tasks))\n\n  return tasks > 0\n\n\ndef set_container_instance_to_draining(cluster, instance_arn):\n  ecs.update_container_instances_state(\n      cluster=cluster,\n      containerInstances=[instance_arn], status='DRAINING')\n\n\ndef pick(dct, *keys):\n  \"\"\"Pick a subset of a dict.\"\"\"\n  return {k: v for k, v in dct.items() if k in keys}\n"
+                },
+                "Role": {
+                    "Fn::GetAtt": [
+                        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRole23116FA3",
+                        "Arn"
+                    ]
+                },
+                "Environment": {
+                    "Variables": {
+                        "CLUSTER": {
+                            "Ref": "Ec2ClusterEE43E89D"
+                        }
+                    }
+                },
+                "Handler": "index.lambda_handler",
+                "Runtime": "python3.6",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ],
+                "Timeout": 310
+            },
+            "DependsOn": [
+                "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRoleDefaultPolicy638C9E33",
+                "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionServiceRole23116FA3"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/DrainECSHook/Function/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionAllowInvokeEcsServiceWithLoggingStackEc2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopic9D17798BAF8BCB5D": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionE0DEFB31",
+                        "Arn"
+                    ]
+                },
+                "Principal": "sns.amazonaws.com",
+                "SourceArn": {
+                    "Ref": "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopicF7263B30"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/DrainECSHook/Function/AllowInvoke:EcsServiceWithLoggingStackEc2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopic9D17798B"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionTopic4795E0F6": {
+            "Type": "AWS::SNS::Subscription",
+            "Properties": {
+                "Protocol": "lambda",
+                "TopicArn": {
+                    "Ref": "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopicF7263B30"
+                },
+                "Endpoint": {
+                    "Fn::GetAtt": [
+                        "Ec2ClusterDefaultAutoScalingGroupDrainECSHookFunctionE0DEFB31",
+                        "Arn"
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/DrainECSHook/Function/Topic/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRole71045ED7": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "autoscaling.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/LifecycleHookDrainHook/Role/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicyE499974B": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sns:Publish",
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Ref": "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopicF7263B30"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicyE499974B",
+                "Roles": [
+                    {
+                        "Ref": "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRole71045ED7"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/LifecycleHookDrainHook/Role/DefaultPolicy/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopicF7263B30": {
+            "Type": "AWS::SNS::Topic",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/LifecycleHookDrainHook/Topic/Resource"
+            }
+        },
+        "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHook5CB1467E": {
+            "Type": "AWS::AutoScaling::LifecycleHook",
+            "Properties": {
+                "AutoScalingGroupName": {
+                    "Ref": "Ec2ClusterDefaultAutoScalingGroupASGC5A6D4C0"
+                },
+                "LifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
+                "DefaultResult": "CONTINUE",
+                "HeartbeatTimeout": 300,
+                "NotificationTargetARN": {
+                    "Ref": "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookTopicF7263B30"
+                },
+                "RoleARN": {
+                    "Fn::GetAtt": [
+                        "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRole71045ED7",
+                        "Arn"
+                    ]
+                }
+            },
+            "DependsOn": [
+                "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRoleDefaultPolicyE499974B",
+                "Ec2ClusterDefaultAutoScalingGroupLifecycleHookDrainHookRole71045ED7"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Cluster/DefaultAutoScalingGroup/LifecycleHookDrainHook/Resource"
+            }
+        },
+        "MyTaskDefinitionTaskRole93FBB305": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/MyTaskDefinition/TaskRole/Resource"
+            }
+        },
+        "MyTaskDefinitionTaskRoleDefaultPolicy7FFBD9AA": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:DescribeLogStreams",
+                                "logs:PutLogEvents"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "MyTaskDefinitionTaskRoleDefaultPolicy7FFBD9AA",
+                "Roles": [
+                    {
+                        "Ref": "MyTaskDefinitionTaskRole93FBB305"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/MyTaskDefinition/TaskRole/DefaultPolicy/Resource"
+            }
+        },
+        "MyTaskDefinitionF5B350B4": {
+            "Type": "AWS::ECS::TaskDefinition",
+            "Properties": {
+                "ContainerDefinitions": [
+                    {
+                        "Essential": true,
+                        "Image": "amazon/amazon-ecs-sample",
+                        "LogConfiguration": {
+                            "LogDriver": "awsfirelens",
+                            "Options": {
+                                "Name": "cloudwatch",
+                                "region": "us-east-1",
+                                "log_group_name": "plasmaglass",
+                                "log_stream_name": "appstream",
+                                "auto_create_group": "true"
+                            }
+                        },
+                        "Memory": 512,
+                        "Name": "AppContainer"
+                    },
+                    {
+                        "Command": [
+                            "/usr/bin/falco",
+                            "-pc",
+                            "-o",
+                            "json_output=true"
+                        ],
+                        "Cpu": 10,
+                        "Essential": true,
+                        "Image": "falcosecurity/falco:0.17.1",
+                        "LogConfiguration": {
+                            "LogDriver": "awsfirelens",
+                            "Options": {
+                                "Name": "cloudwatch",
+                                "region": "us-east-1",
+                                "log_group_name": "falco",
+                                "log_stream_name": "alerts",
+                                "auto_create_group": "true"
+                            }
+                        },
+                        "Memory": 512,
+                        "MountPoints": [
+                            {
+                                "ContainerPath": "/host/var/run/docker.sock",
+                                "ReadOnly": false,
+                                "SourceVolume": "docker-socket"
+                            },
+                            {
+                                "ContainerPath": "/host/dev",
+                                "ReadOnly": false,
+                                "SourceVolume": "dev-fs"
+                            },
+                            {
+                                "ContainerPath": "/host/proc",
+                                "ReadOnly": true,
+                                "SourceVolume": "proc-fs"
+                            },
+                            {
+                                "ContainerPath": "/host/boot",
+                                "ReadOnly": true,
+                                "SourceVolume": "boot-fs"
+                            },
+                            {
+                                "ContainerPath": "/host/lib/modules",
+                                "ReadOnly": true,
+                                "SourceVolume": "lib-modules"
+                            },
+                            {
+                                "ContainerPath": "/host/usr",
+                                "ReadOnly": true,
+                                "SourceVolume": "usr-fs"
+                            }
+                        ],
+                        "Name": "idsContainer",
+                        "Privileged": true
+                    },
+                    {
+                        "Essential": true,
+                        "FirelensConfiguration": {
+                            "Type": "fluentbit"
+                        },
+                        "Image": {
+                            "Ref": "SsmParameterValueawsserviceawsforfluentbitlatestC96584B6F00A464EAD1953AFF4B05118Parameter"
+                        },
+                        "LogConfiguration": {
+                            "LogDriver": "awslogs",
+                            "Options": {
+                                "awslogs-group": {
+                                    "Ref": "MyTaskDefinitionlogrouterLogGroup5B38FA50"
+                                },
+                                "awslogs-stream-prefix": "firelens",
+                                "awslogs-region": "us-east-1"
+                            }
+                        },
+                        "MemoryReservation": 50,
+                        "Name": "log-router"
+                    }
+                ],
+                "ExecutionRoleArn": {
+                    "Fn::GetAtt": [
+                        "MyTaskDefinitionExecutionRole3D88C23D",
+                        "Arn"
+                    ]
+                },
+                "Family": "EcsServiceWithLoggingStackMyTaskDefinitionD22C4F06",
+                "NetworkMode": "bridge",
+                "RequiresCompatibilities": [
+                    "EC2"
+                ],
+                "TaskRoleArn": {
+                    "Fn::GetAtt": [
+                        "MyTaskDefinitionTaskRole93FBB305",
+                        "Arn"
+                    ]
+                },
+                "Volumes": [
+                    {
+                        "Host": {
+                            "SourcePath": "/var/run/docker.sock"
+                        },
+                        "Name": "docker-socket"
+                    },
+                    {
+                        "Host": {
+                            "SourcePath": "/dev"
+                        },
+                        "Name": "dev-fs"
+                    },
+                    {
+                        "Host": {
+                            "SourcePath": "/proc"
+                        },
+                        "Name": "proc-fs"
+                    },
+                    {
+                        "Host": {
+                            "SourcePath": "/boot"
+                        },
+                        "Name": "boot-fs"
+                    },
+                    {
+                        "Host": {
+                            "SourcePath": "/lib/modules"
+                        },
+                        "Name": "lib-modules"
+                    },
+                    {
+                        "Host": {
+                            "SourcePath": "/usr"
+                        },
+                        "Name": "usr-fs"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/MyTaskDefinition/Resource"
+            }
+        },
+        "MyTaskDefinitionExecutionRole3D88C23D": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/MyTaskDefinition/ExecutionRole/Resource"
+            }
+        },
+        "MyTaskDefinitionExecutionRoleDefaultPolicy17975C1F": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "ecr:GetAuthorizationToken",
+                                "ecr:BatchCheckLayerAvailability",
+                                "ecr:GetDownloadUrlForLayer",
+                                "ecr:BatchGetImage"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "MyTaskDefinitionlogrouterLogGroup5B38FA50",
+                                    "Arn"
+                                ]
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "MyTaskDefinitionExecutionRoleDefaultPolicy17975C1F",
+                "Roles": [
+                    {
+                        "Ref": "MyTaskDefinitionExecutionRole3D88C23D"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/MyTaskDefinition/ExecutionRole/DefaultPolicy/Resource"
+            }
+        },
+        "MyTaskDefinitionlogrouterLogGroup5B38FA50": {
+            "Type": "AWS::Logs::LogGroup",
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/MyTaskDefinition/log-router/LogGroup/Resource"
+            }
+        },
+        "Ec2Service04A33183": {
+            "Type": "AWS::ECS::Service",
+            "Properties": {
+                "Cluster": {
+                    "Ref": "Ec2ClusterEE43E89D"
+                },
+                "DeploymentConfiguration": {
+                    "MaximumPercent": 200,
+                    "MinimumHealthyPercent": 50
+                },
+                "EnableECSManagedTags": false,
+                "LaunchType": "EC2",
+                "SchedulingStrategy": "REPLICA",
+                "TaskDefinition": {
+                    "Ref": "MyTaskDefinitionF5B350B4"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/Ec2Service/Service"
+            }
+        },
+        "CDKMetadata": {
+            "Type": "AWS::CDK::Metadata",
+            "Properties": {
+                "Modules": "aws-cdk=1.87.1,@aws-cdk/assets=1.89.0,@aws-cdk/aws-applicationautoscaling=1.89.0,@aws-cdk/aws-autoscaling=1.89.0,@aws-cdk/aws-autoscaling-common=1.89.0,@aws-cdk/aws-autoscaling-hooktargets=1.89.0,@aws-cdk/aws-cloudwatch=1.89.0,@aws-cdk/aws-codeguruprofiler=1.89.0,@aws-cdk/aws-ec2=1.89.0,@aws-cdk/aws-ecr=1.89.0,@aws-cdk/aws-ecr-assets=1.89.0,@aws-cdk/aws-ecs=1.89.0,@aws-cdk/aws-elasticloadbalancingv2=1.89.0,@aws-cdk/aws-events=1.89.0,@aws-cdk/aws-iam=1.89.0,@aws-cdk/aws-kms=1.89.0,@aws-cdk/aws-lambda=1.89.0,@aws-cdk/aws-logs=1.89.0,@aws-cdk/aws-s3=1.89.0,@aws-cdk/aws-s3-assets=1.89.0,@aws-cdk/aws-servicediscovery=1.89.0,@aws-cdk/aws-sns=1.89.0,@aws-cdk/aws-sns-subscriptions=1.89.0,@aws-cdk/aws-sqs=1.89.0,@aws-cdk/aws-ssm=1.89.0,@aws-cdk/cloud-assembly-schema=1.89.0,@aws-cdk/core=1.89.0,@aws-cdk/cx-api=1.89.0,@aws-cdk/region-info=1.89.0,jsii-runtime=node.js/v10.23.2"
+            },
+            "Metadata": {
+                "aws:cdk:path": "EcsServiceWithLoggingStack/CDKMetadata/Default"
+            }
+        }
+    },
+    "Parameters": {
+        "SsmParameterValueawsserviceecsoptimizedamiamazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": {
+            "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+            "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
+        },
+        "SsmParameterValueawsserviceawsforfluentbitlatestC96584B6F00A464EAD1953AFF4B05118Parameter": {
+            "Type": "AWS::SSM::Parameter::Value<String>",
+            "Default": "/aws/service/aws-for-fluent-bit/latest"
+        }
+    }
+}
